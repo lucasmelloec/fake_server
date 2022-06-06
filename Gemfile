@@ -32,6 +32,10 @@ gem 'bootsnap', require: false
 
 gem 'jsonapi-serializer'
 
+gem 'responders'
+
+gem 'rack-cors'
+
 group :development, :test do
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
@@ -47,6 +51,7 @@ group :development do
   gem 'rubocop-shopify', require: false
   gem 'solargraph'
   gem 'web-console'
+  gem 'reek', require: false
 end
 
 group :test do

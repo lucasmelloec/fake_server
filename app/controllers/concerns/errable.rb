@@ -12,29 +12,25 @@ module Errable
     model = self.class.model
     errors_key = "#{model}_errors".to_sym
 
-    if session.key?(errors_key)
-      model_instance = model.classify.constantize.new
-
-      session[errors_key].each do |error, error_messages|
-        error_messages.each do |error_message|
-          model_instance.errors.add(error, error_message)
-        end
-      end
-      session.delete(errors_key)
-
-      instance_variable_set("@#{model}", model_instance)
-    end
-  end
-
-  def define_errors
-    unless instance_variable_defined?("@#{self.class.model}")
+    unless session.key?(errors_key)
       return
     end
 
-    model_instance = instance_variable_get("@#{self.class.model}")
-    if model_instance.errors.any?
-      errors_key = "#{model_instance.class.name.downcase}_errors".to_sym
-      session[errors_key] = model_instance.errors
+    model_instance = model.classify.constantize.new
+
+    iterate_errors(model_instance, errors_key)
+  end
+
+  def define_errors
+    model_name = self.class.model
+    unless instance_variable_defined?("@#{model_name}")
+      return
+    end
+
+    model_instance_errors = instance_variable_get("@#{model_name}").errors
+    if model_instance_errors.any?
+      errors_key = "#{model_name}_errors".to_sym
+      session[errors_key] = model_instance_errors
     end
   end
 
@@ -42,5 +38,18 @@ module Errable
     def errable_model(model_symbol)
       self.model = model_symbol.to_s.downcase.pluralize(1)
     end
+  end
+
+  private
+
+  def iterate_errors(model, errors_key)
+    session[errors_key].each do |error_key, error_messages|
+      error_messages.each do |error_message|
+        model.errors.add(error_key, error_message)
+      end
+    end
+    session.delete(errors_key)
+
+    instance_variable_set("@#{self.class.model}", model)
   end
 end

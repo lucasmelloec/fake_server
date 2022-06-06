@@ -8,18 +8,12 @@ class DomainsController < ApplicationController
   def index
     @domains = Domain.all
 
-    respond_to do |format|
-      format.html
-      format.json { render json: DomainSerializer.new(@domains).serializable_hash }
-    end
+    respond_with(@domains)
   end
 
   # GET /domains/1 or /domains/1.json
   def show
-    respond_to do |format|
-      format.html
-      format.json { render json: DomainSerializer.new(@domain).serializable_hash, status: :ok }
-    end
+    respond_with(@domain, include: [:expectations])
   end
 
   # GET /domains/new
@@ -35,38 +29,22 @@ class DomainsController < ApplicationController
   def create
     @domain = Domain.new(domain_params)
 
-    respond_to do |format|
-      if @domain.save
-        format.html { redirect_to domain_url(@domain), notice: "Domain was successfully created." }
-        format.json { render json: DomainSerializer.new(@domain).serializable_hash, status: :created }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @domain.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = 'Domain was successfully created.' if @domain.save
+
+    respond_with(@domain)
   end
 
   # PATCH/PUT /domains/1 or /domains/1.json
   def update
-    respond_to do |format|
-      if @domain.update(domain_params)
-        format.html { redirect_to domain_url(@domain), notice: "Domain was successfully updated." }
-        format.json { render json: DomainSerializer.new(@domain).serializable_hash, status: :ok }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @domain.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = 'Domain was successfully updated.' if @domain.update(domain_params)
+    respond_with(@domain)
   end
 
   # DELETE /domains/1 or /domains/1.json
   def destroy
     @domain.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to domains_url, notice: "Domain was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    respond_with(@domain)
   end
 
   private

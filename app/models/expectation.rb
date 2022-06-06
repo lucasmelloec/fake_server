@@ -3,7 +3,13 @@ class Expectation < ApplicationRecord
 
   belongs_to :domain
 
-  validates :path, uniqueness: { scope: :domain_id }
+  has_many :responses, dependent: :destroy
+
+  VALID_METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
+  private_constant :VALID_METHODS
+
+  validates :path, uniqueness: { scope: [:domain_id, :url_param] }
+  validates :method, presence: true, inclusion: { in: VALID_METHODS }
 
   def path=(new_path)
     self[:path] = "/#{new_path.delete_prefix("/").chomp("/")}"

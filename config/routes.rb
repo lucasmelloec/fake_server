@@ -4,7 +4,9 @@ Rails.application.routes.draw do
     get '/', to: redirect('/config/domains')
 
     resources :domains do
-      resources :expectations
+      resources :expectations do
+        resources :responses
+      end
     end
   end
 

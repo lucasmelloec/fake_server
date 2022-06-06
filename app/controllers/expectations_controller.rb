@@ -7,15 +7,9 @@ class ExpectationsController < ApplicationController
   def create
     @expectation = @domain.expectations.build(expectation_params)
 
-    respond_to do |format|
-      if @expectation.save
-        format.html { redirect_to domain_url(@domain), notice: "Expectation was successfully created." }
-        format.json { render json: DomainSerializer.new(@domain).serializable_hash, status: :created }
-      else
-        format.html { redirect_to domain_url(@domain) }
-        format.json { render json: @expectation.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:notice] = 'Expectation was successfully created.' if @expectation.save
+
+    respond_with([@domain, @expectation], location: domain_path(@domain), action: nil)
   end
 
   private
@@ -27,6 +21,6 @@ class ExpectationsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def expectation_params
-    params.require(:expectation).permit(:path, :url_param)
+    params.require(:expectation).permit(:path, :url_param, :method)
   end
 end

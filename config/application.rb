@@ -1,6 +1,6 @@
-require_relative "boot".freeze
+require_relative 'boot'.freeze
 
-require "rails/all"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -8,6 +8,9 @@ Bundler.require(*Rails.groups)
 
 module FakeServer
   class Application < Rails::Application
+    # Use the responders controller from the responders gem
+    config.app_generators.scaffold_controller :responders_controller
+
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 

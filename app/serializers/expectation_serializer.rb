@@ -1,4 +1,4 @@
 class ExpectationSerializer
   include JSONAPI::Serializer
-  attributes :path
+  attributes :path, :method, :url_param
 end

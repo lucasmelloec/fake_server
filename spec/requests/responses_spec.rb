@@ -12,9 +12,9 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe '/domains', type: :request do
+RSpec.describe '/responses', type: :request do
   # This should return the minimal set of attributes required to create a valid
-  # Domain. As you add validations to Domain, be sure to
+  # Response. As you add validations to Response, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
     skip('Add a hash of attributes valid for your model')
@@ -26,58 +26,58 @@ RSpec.describe '/domains', type: :request do
 
   describe 'GET /index' do
     it 'renders a successful response' do
-      Domain.create! valid_attributes
-      get domains_url
+      Response.create! valid_attributes
+      get responses_url
       expect(response).to be_successful
     end
   end
 
   describe 'GET /show' do
     it 'renders a successful response' do
-      domain = Domain.create! valid_attributes
-      get domain_url(domain)
+      response = Response.create! valid_attributes
+      get response_url(response)
       expect(response).to be_successful
     end
   end
 
   describe 'GET /new' do
     it 'renders a successful response' do
-      get new_domain_url
+      get new_response_url
       expect(response).to be_successful
     end
   end
 
   describe 'GET /edit' do
     it 'renders a successful response' do
-      domain = Domain.create! valid_attributes
-      get edit_domain_url(domain)
+      response = Response.create! valid_attributes
+      get edit_response_url(response)
       expect(response).to be_successful
     end
   end
 
   describe 'POST /create' do
     context 'with valid parameters' do
-      it 'creates a new Domain' do
+      it 'creates a new Response' do
         expect do
-          post domains_url, params: { domain: valid_attributes }
-        end.to change(Domain, :count).by(1)
+          post responses_url, params: { response: valid_attributes }
+        end.to change(Response, :count).by(1)
       end
 
-      it 'redirects to the created domain' do
-        post domains_url, params: { domain: valid_attributes }
-        expect(response).to redirect_to(domain_url(Domain.last))
+      it 'redirects to the created response' do
+        post responses_url, params: { response: valid_attributes }
+        expect(response).to redirect_to(response_url(Response.last))
       end
     end
 
     context 'with invalid parameters' do
-      it 'does not create a new Domain' do
+      it 'does not create a new Response' do
         expect do
-          post domains_url, params: { domain: invalid_attributes }
-        end.not_to change(Domain, :count)
+          post responses_url, params: { response: invalid_attributes }
+        end.not_to change(Response, :count)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post domains_url, params: { domain: invalid_attributes }
+        post responses_url, params: { response: invalid_attributes }
         expect(response).to be_successful
       end
     end
@@ -89,42 +89,42 @@ RSpec.describe '/domains', type: :request do
         skip('Add a hash of attributes valid for your model')
       end
 
-      it 'updates the requested domain' do
-        domain = Domain.create! valid_attributes
-        patch domain_url(domain), params: { domain: new_attributes }
-        domain.reload
+      it 'updates the requested response' do
+        response = Response.create! valid_attributes
+        patch response_url(response), params: { response: new_attributes }
+        response.reload
         skip('Add assertions for updated state')
       end
 
-      it 'redirects to the domain' do
-        domain = Domain.create! valid_attributes
-        patch domain_url(domain), params: { domain: new_attributes }
-        domain.reload
-        expect(response).to redirect_to(domain_url(domain))
+      it 'redirects to the response' do
+        response = Response.create! valid_attributes
+        patch response_url(response), params: { response: new_attributes }
+        response.reload
+        expect(response).to redirect_to(response_url(response))
       end
     end
 
     context 'with invalid parameters' do
       it "renders a successful response (i.e. to display the 'edit' template)" do
-        domain = Domain.create! valid_attributes
-        patch domain_url(domain), params: { domain: invalid_attributes }
+        response = Response.create! valid_attributes
+        patch response_url(response), params: { response: invalid_attributes }
         expect(response).to be_successful
       end
     end
   end
 
   describe 'DELETE /destroy' do
-    it 'destroys the requested domain' do
-      domain = Domain.create! valid_attributes
+    it 'destroys the requested response' do
+      response = Response.create! valid_attributes
       expect do
-        delete domain_url(domain)
-      end.to change(Domain, :count).by(-1)
+        delete response_url(response)
+      end.to change(Response, :count).by(-1)
     end
 
-    it 'redirects to the domains list' do
-      domain = Domain.create! valid_attributes
-      delete domain_url(domain)
-      expect(response).to redirect_to(domains_url)
+    it 'redirects to the responses list' do
+      response = Response.create! valid_attributes
+      delete response_url(response)
+      expect(response).to redirect_to(responses_url)
     end
   end
 end

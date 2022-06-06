@@ -18,14 +18,11 @@ AllCops:
     - '**/Rakefile'
     - '**/rails'
     - '**/vendor/**/*'
-    - '**/spec_helper.rb'
     - 'node_modules/**/*'
     - 'bin/*'
     - 'db/schema.rb'
     - 'tmp/**/*'
     - '.cache/**/*'
-    - 'config/puma.rb'
-    - 'config/boot.rb'
   
 
 Layout/LineLength:
@@ -235,7 +232,8 @@ Style/StringConcatenation:
   Enabled: true
 
 Style/StringLiterals:
-  Enabled: false
+  Enabled: true
+  EnforcedStyle: 'single_quotes'
 
 Style/TrailingCommaInHashLiteral:
   Enabled: false

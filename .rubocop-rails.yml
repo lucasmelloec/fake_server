@@ -61,3 +61,6 @@ Rails/WhereExists:
 
 Rails/WhereNot:
   Enabled: true
+
+Rails/LexicallyScopedActionFilter:
+  Enabled: false

@@ -3,5 +3,6 @@ class Domain < ApplicationRecord
 
   has_many :expectations, dependent: :destroy
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true
+  validates :path, uniqueness: true
 end

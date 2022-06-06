@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :expectation do
-    path { "MyString" }
+    path { 'MyString' }
     domain { nil }
   end
 end

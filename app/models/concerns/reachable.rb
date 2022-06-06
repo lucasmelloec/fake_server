@@ -5,6 +5,6 @@ module Reachable
     validates :path,
       presence: true,
       format: { with: %r{/?([a-zA-Z0-9._~%-]+/?)+},
-                message: "can have only allowed characters" }
+                message: 'can have only allowed characters' }
   end
 end
