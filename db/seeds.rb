@@ -5,3 +5,5 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+domain = Domain.create!({ name: 'TestDomain', path: 'test' })
+Expectation.create!({ path: '/v1/blabla', domain: })

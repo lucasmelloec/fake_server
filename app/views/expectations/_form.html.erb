@@ -1,0 +1,17 @@
+<%= form_with(model: [ domain, domain.expectations.build ] ) do |form| %>
+  <%= render 'layouts/errors', model: expectation %>
+
+  <div>
+    <%= form.label :path, style: "display: block" %>
+    <%= form.text_field :path %>
+  </div>
+
+  <div>
+    <%= form.label :url_param, style: "display: block" %>
+    <%= form.text_field :url_param %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
