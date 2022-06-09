@@ -11,12 +11,6 @@ class Expectation < ApplicationRecord
   validates :path, uniqueness: { scope: [:domain_id, :url_param] }
   validates :method, presence: true, inclusion: { in: VALID_METHODS }
 
-  def path=(new_path)
-    return new_path if new_path.blank?
-
-    self[:path] = "/#{new_path.delete_prefix("/").chomp("/")}"
-  end
-
   def full_path
     return path if url_param.blank?
 

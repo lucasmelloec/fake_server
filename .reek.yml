@@ -22,6 +22,8 @@ directories:
   "app/models|**/app/models":
     InstanceVariableAssumption:
       enabled: false
+    Attribute:
+      enabled: false
 
 exclude_paths:
   - db/migrate

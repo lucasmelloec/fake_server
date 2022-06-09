@@ -1,13 +1,19 @@
 class DefaultController < ApplicationController
-  class MissingPath < StandardError; end
-
-  rescue_from MissingPath, with: :missing_path
+  rescue_from MatchRoute::MissingResource, with: :missing_resource
 
   def all
-    raise MissingPath
+    match_route = MatchRoute.new(all_params)
+
+    render json: match_route.body, status: match_route.code
   end
 
-  def missing_path
-    render json: { message: 'missing path' }, status: :ok
+  def missing_resource(resource_name)
+    render json: { method: request.method, path: request.path, message: "missing #{resource_name}" }, status: :not_found
+  end
+
+  private
+
+  def all_params
+    { method: request.method, fullpath: request.path }
   end
 end
