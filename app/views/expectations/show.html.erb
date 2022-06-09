@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @expectation %>
+
+<div>
+  <%= link_to "Edit this expectation", edit_expectation_path(@expectation) %> |
+  <%= link_to "Back to expectations", domain_expectations_path(@expectation.domain) %>
+
+  <%= button_to 'Destroy this expectation', @expectation, method: :delete %>
+</div>

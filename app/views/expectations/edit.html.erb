@@ -1,0 +1,10 @@
+<h1>Editing expectation</h1>
+
+<%= render "form", domain: nil, expectation: @expectation %>
+
+<br>
+
+<div>
+  <%= link_to "Show this expectation", @expectation %> |
+  <%= link_to "Back to expectations", domain_expectations_path(@expectation.domain) %>
+</div>

@@ -1,24 +1,8 @@
-<%= form_with(model: response) do |form| %>
-  <% if response.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(response.errors.count, "error") %> prohibited this response from being saved:</h2>
-
-      <ul>
-        <% response.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+<%= form_with(model: [expectation, response]) do |form| %>
+  <%= render 'layouts/errors', model: response %>
   <div>
-    <%= form.label :body, style: "display: block" %>
-    <%= form.text_field :body %>
-  </div>
-
-  <div>
-    <%= form.label :type, style: "display: block" %>
-    <%= form.text_field :type %>
+    <%= form.label :format, style: "display: block" %>
+    <%= form.text_field :format %>
   </div>
 
   <div>
@@ -27,8 +11,8 @@
   </div>
 
   <div>
-    <%= form.label :expectation_id, style: "display: block" %>
-    <%= form.text_field :expectation_id %>
+    <%= form.label :body, style: "display: block" %>
+    <%= form.text_field :body %>
   </div>
 
   <div>

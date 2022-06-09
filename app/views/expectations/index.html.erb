@@ -1,0 +1,18 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Expectations</h1>
+
+<div id="expectations">
+  <% @expectations.each do |expectation| %>
+    <%= render expectation %>
+    <p>
+      <%= link_to "Show this expectation", expectation %>
+    </p>
+  <% end %>
+</div>
+
+<div>
+  <%= link_to "New expectation", new_domain_expectation_path %>
+  <br />
+  <%= link_to "Back to domain", @domain %>
+</div>

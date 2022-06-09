@@ -1,8 +1,17 @@
 <div id="<%= dom_id expectation %>">
   <p>
-    <strong><%= expectation.method %> </strong>
+    <strong>Method:</strong>
+    <%= expectation.method %>
+  </p>
+
+  <p>
     <strong>Path:</strong>
     <%= expectation.full_path %>
+  </p>
+
+  <p>
+    <strong>Responses:</strong>
+    <%= link_to pluralize(expectation.responses.count, 'response'), expectation_responses_path(expectation) %>
   </p>
 
 </div>

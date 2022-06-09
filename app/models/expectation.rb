@@ -12,6 +12,8 @@ class Expectation < ApplicationRecord
   validates :method, presence: true, inclusion: { in: VALID_METHODS }
 
   def path=(new_path)
+    return new_path if new_path.blank?
+
     self[:path] = "/#{new_path.delete_prefix("/").chomp("/")}"
   end
 

@@ -9,4 +9,9 @@
     <%= domain.path %>
   </p>
 
+  <p>
+    <strong>Expectations:</strong>
+    <%= link_to pluralize(domain.expectations.count, 'expectation'), domain_expectations_path(domain) %>
+  </p>
+
 </div>

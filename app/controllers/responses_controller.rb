@@ -1,48 +1,44 @@
 class ResponsesController < ApplicationController
   before_action :set_response, only: %i[show edit update destroy]
 
-  # GET /responses
+  # GET /domains/1/expectations/1/responses
   def index
-    @responses = Response.all
+    @responses = expectation.responses
+    respond_with(@responses)
   end
 
-  # GET /responses/1
+  # GET /domains/1/expectations/1/responses/1
   def show
+    respond_with(@response)
   end
 
-  # GET /responses/new
+  # GET /domains/1/expectations/1/responses/new
   def new
-    @response = Response.new
+    @response = expectation.responses.build
   end
 
-  # GET /responses/1/edit
+  # GET /domains/1/expectations/1/responses/1/edit
   def edit
   end
 
-  # POST /responses
+  # POST /domains/1/expectations/1/responses
   def create
-    @response = Response.new(response_params)
+    @response = expectation.responses.build(response_params)
 
-    if @response.save
-      redirect_to @response, notice: 'Response was successfully created.'
-    else
-      render :new, status: :unprocessable_entity
-    end
+    flash[:notice] = 'Response was successfully created.' if @response.save
+    respond_with(@response)
   end
 
-  # PATCH/PUT /responses/1
+  # PATCH/PUT /domains/1/expectations/1/responses/1
   def update
-    if @response.update(response_params)
-      redirect_to @response, notice: 'Response was successfully updated.'
-    else
-      render :edit, status: :unprocessable_entity
-    end
+    flash[:notice] = 'Response was successfully updated.' if @response.update(response_params)
+    respond_with(@response)
   end
 
-  # DELETE /responses/1
+  # DELETE /domains/1/expectations/1/responses/1
   def destroy
     @response.destroy!
-    redirect_to responses_url, notice: 'Response was successfully destroyed.'
+    respond_with(@response)
   end
 
   private
@@ -50,6 +46,10 @@ class ResponsesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_response
     @response = Response.find(params[:id])
+  end
+
+  def expectation
+    @expectation ||= Expectation.find(params[:expectation_id])
   end
 
   # Only allow a list of trusted parameters through.

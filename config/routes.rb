@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   scope :config do
     get '/', to: redirect('/config/domains')
 
-    resources :domains do
+    resources :domains, shallow: true do
       resources :expectations do
         resources :responses
       end

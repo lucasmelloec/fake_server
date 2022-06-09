@@ -1,9 +1,9 @@
 <h1>New response</h1>
 
-<%= render "form", response: @response %>
+<%= render "form", expectation: @expectation, response: @response %>
 
 <br>
 
 <div>
-  <%= link_to "Back to responses", responses_path %>
+  <%= link_to "Back to responses", expectation_responses_path(@expectation) %>
 </div>

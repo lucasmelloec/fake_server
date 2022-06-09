@@ -1,5 +1,8 @@
 class DomainSerializer
   include JSONAPI::Serializer
   attributes :name, :path
-  has_many :expectations, options: { include: [:expectations] }
+
+  attributes :expectations do |object|
+    ExpectationSerializer.new(object.expectations)
+  end
 end

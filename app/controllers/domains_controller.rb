@@ -1,7 +1,4 @@
 class DomainsController < ApplicationController
-  include Errable
-  errable_model :expectation
-
   before_action :set_domain, only: %i[show edit update destroy]
 
   # GET /domains or /domains.json
@@ -13,7 +10,7 @@ class DomainsController < ApplicationController
 
   # GET /domains/1 or /domains/1.json
   def show
-    respond_with(@domain, include: [:expectations])
+    respond_with(@domain)
   end
 
   # GET /domains/new
