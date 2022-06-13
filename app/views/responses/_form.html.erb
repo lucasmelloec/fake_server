@@ -2,7 +2,7 @@
   <%= render 'layouts/errors', model: response %>
   <div>
     <%= form.label :format, style: "display: block" %>
-    <%= form.text_field :format %>
+    <%= form.select :format, Response::VALID_FORMATS %>
   </div>
 
   <div>

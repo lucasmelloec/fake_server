@@ -49,9 +49,11 @@ group :development do
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
   gem 'rubocop-shopify', require: false
-  gem 'solargraph'
+  gem 'solargraph', require: false
   gem 'web-console'
   gem 'reek', require: false
+  gem 'solargraph-rails', require: false
+  gem 'annotate'
 end
 
 group :test do

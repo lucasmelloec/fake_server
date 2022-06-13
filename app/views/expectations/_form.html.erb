@@ -13,7 +13,7 @@
 
   <div>
     <%= form.label :method, style: "display: block" %>
-    <%= form.text_field :method %>
+    <%= form.select :method, Expectation::VALID_METHODS %>
   </div>
 
   <div>
